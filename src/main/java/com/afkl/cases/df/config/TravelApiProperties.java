@@ -21,12 +21,13 @@ public class TravelApiProperties {
     private String airports;
 
     @SneakyThrows
-    public URI getAirports() {
+    public URI getAirportsUri() {
         return new URI(airports);
     }
 
-    public void setAirports(final String airports) {
-        this.airports = airports;
+    @SneakyThrows
+    public URI getAirportsUri(final String code) {
+        return new URI(airports + "/" + code);
     }
 
 }
