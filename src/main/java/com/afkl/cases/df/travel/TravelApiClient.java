@@ -18,13 +18,21 @@ public class TravelApiClient {
     private RestTemplate restTemplate;
     private TravelApiProperties travelApiProperties;
 
-    public Optional<AirportsResponse> fetchAirports() {
+    public Optional<AirportsResponse> fetchAirports(final Integer size, final Integer page, final String term) {
         try {
-            final URIBuilder uriBuilder = new URIBuilder(travelApiProperties.getAirports());
+            final URIBuilder uriBuilder = buildUri(size, page, term);
             final AirportsResponse body = restTemplate.getForEntity(uriBuilder.build(), AirportsResponse.class).getBody();
             return Optional.ofNullable(body.toBuilder().embedded(body.getEmbedded()).build());
         } catch (URISyntaxException e) {
             throw new ServerException("Airport URI could not be parsed as a URI reference.", e);
         }
+    }
+
+    private URIBuilder buildUri(final Integer size, final Integer page, final String term) {
+        final URIBuilder uriBuilder = new URIBuilder(travelApiProperties.getAirports());
+        Optional.ofNullable(size).ifPresent(s -> uriBuilder.setParameter("size", String.valueOf(s)));
+        Optional.ofNullable(page).ifPresent(p -> uriBuilder.setParameter("page", String.valueOf(p)));
+        Optional.ofNullable(term).ifPresent(t -> uriBuilder.setParameter("term", t));
+        return uriBuilder;
     }
 }

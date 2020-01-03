@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,7 +17,9 @@ public class AirportController {
     private TravelApiClient travelApiClient;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public AirportsResponse getAirports() {
-        return travelApiClient.fetchAirports().get();
+    public AirportsResponse getAirports(@RequestParam(value = "size", required = false, defaultValue = "1") final Integer size,
+                                        @RequestParam(value = "page", required = false, defaultValue = "0") final Integer page,
+                                        @RequestParam(value = "term", required = false) final String term) {
+        return travelApiClient.fetchAirports(size, page, term).get();
     }
 }
