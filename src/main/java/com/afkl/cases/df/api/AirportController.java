@@ -1,5 +1,6 @@
 package com.afkl.cases.df.api;
 
+import com.afkl.cases.df.helper.Sort;
 import com.afkl.cases.df.model.dto.AirportsResponse;
 import com.afkl.cases.df.travel.TravelApiClient;
 import lombok.AllArgsConstructor;
@@ -17,9 +18,10 @@ public class AirportController {
     private TravelApiClient travelApiClient;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public AirportsResponse getAirports(@RequestParam(value = "size", required = false, defaultValue = "1") final Integer size,
-                                        @RequestParam(value = "page", required = false, defaultValue = "0") final Integer page,
-                                        @RequestParam(value = "term", required = false) final String term) {
-        return travelApiClient.fetchAirports(size, page, term).get();
+    public AirportsResponse getAirports(@RequestParam(value = "size", required = false) final Integer size,
+                                        @RequestParam(value = "page", required = false) final Integer page,
+                                        @RequestParam(value = "term", required = false) final String term,
+                                        @RequestParam(value = "sort", required = false, defaultValue = "desc") final Sort sort) {
+        return travelApiClient.fetchAirports(size, page, term, sort).get();
     }
 }
