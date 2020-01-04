@@ -29,7 +29,7 @@ public class TravelApiClient {
     private RestTemplate restTemplate;
     private TravelApiProperties travelApiProperties;
 
-    public AirportsResponse fetchAirports(final Integer size, final Integer page, final String term, Sort sort) {
+    public AirportsResponse fetchAirports(final Integer size, final Integer page, final String term, final Sort sort) {
         try {
             final var uriBuilder = buildUri(size, page, term);
             final var body = restTemplate.getForEntity(uriBuilder.build(), AirportsResponse.class).getBody();
