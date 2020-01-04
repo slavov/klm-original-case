@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/airports", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/airports", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AirportController {
 
     private TravelApiClient travelApiClient;

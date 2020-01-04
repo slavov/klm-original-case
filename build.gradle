@@ -38,11 +38,13 @@ dependencies {
         exclude module: "spring-boot-starter-tomcat"
     }
     implementation("org.springframework.boot:spring-boot-starter-jetty")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     compileOnly("org.projectlombok:lombok:1.18.10")
     annotationProcessor("org.projectlombok:lombok:1.18.10")
     implementation("org.apache.httpcomponents:httpclient:4.5.10")
+    runtime("com.h2database:h2:1.4.200")
 
     testCompile("junit:junit")
 }

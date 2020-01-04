@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/fares", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/fares", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FareController {
 
     private FareService fareService;
