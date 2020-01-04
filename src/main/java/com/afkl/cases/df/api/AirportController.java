@@ -28,15 +28,15 @@ public class AirportController {
     }
 
     @GetMapping
-    public AirportsResponse getAirports(@RequestParam(value = "size", required = false) final Integer size,
-                                        @RequestParam(value = "page", required = false) final Integer page,
-                                        @RequestParam(value = "term", required = false) final String term,
-                                        @RequestParam(value = "sort", required = false, defaultValue = "desc") final Sort sort) {
+    public AirportsResponse fetchAirports(@RequestParam(value = "size", required = false) final Integer size,
+                                          @RequestParam(value = "page", required = false) final Integer page,
+                                          @RequestParam(value = "term", required = false) final String term,
+                                          @RequestParam(value = "sort", required = false, defaultValue = "desc") final Sort sort) {
         return travelApiClient.fetchAirports(size, page, term, sort);
     }
 
     @GetMapping(value = "/{code}")
-    public Location getAirport(@PathVariable final String code) {
+    public Location fetchAirport(@PathVariable final String code) {
         //FIX: with param lang=nl & lang=en the data is the same
         return travelApiClient.fetchAirport(code);
     }

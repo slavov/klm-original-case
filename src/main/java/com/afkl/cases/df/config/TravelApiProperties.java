@@ -14,11 +14,19 @@ import java.net.URI;
 @PropertySource("classpath:travel-api.properties")
 public class TravelApiProperties {
 
+    private static final String PATH_DELIMITER = "/";
+
     @Value("${url.token}")
     private String token;
+
     @URL
     @Value("${url.airports}")
     private String airports;
+
+    @URL
+    @Value("${url.fare}")
+    private String fare;
+
 
     @SneakyThrows
     public URI getAirportsUri() {
@@ -27,8 +35,12 @@ public class TravelApiProperties {
 
     @SneakyThrows
     public URI getAirportsUri(final String code) {
-        return new URI(airports + "/" + code);
+        return new URI(airports + PATH_DELIMITER + code);
     }
 
+    @SneakyThrows
+    public URI getFareUri(final String origin, final String destination) {
+        return new URI(fare + PATH_DELIMITER + origin + PATH_DELIMITER + destination);
+    }
 }
 

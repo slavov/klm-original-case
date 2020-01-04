@@ -5,6 +5,7 @@ import com.afkl.cases.df.exception.ServerException;
 import com.afkl.cases.df.helper.Sort;
 import com.afkl.cases.df.model.dto.AirportsResponse;
 import com.afkl.cases.df.model.dto.Embedded;
+import com.afkl.cases.df.model.dto.FareResponse;
 import com.afkl.cases.df.model.dto.Location;
 import lombok.AllArgsConstructor;
 import org.apache.http.client.utils.URIBuilder;
@@ -38,6 +39,10 @@ public class TravelApiClient {
 
     public Location fetchAirport(final String code) {
         return restTemplate.getForEntity(travelApiProperties.getAirportsUri(code), Location.class).getBody();
+    }
+
+    public FareResponse fetchFare(final String origin, final String destination) {
+        return restTemplate.getForEntity(travelApiProperties.getFareUri(origin, destination), FareResponse.class).getBody();
     }
 
     private URIBuilder buildUri(final Integer size, final Integer page, final String term) {
